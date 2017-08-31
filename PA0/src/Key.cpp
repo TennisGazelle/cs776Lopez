@@ -3,7 +3,10 @@
 
 #include "Key.h"
 
-Key::Key() {
+Key::Key(int size) {
+	for (int i = 0; i < size; i++) {
+		push_back(0);
+	}
 }
 
 Key::~Key() {
@@ -12,14 +15,26 @@ Key::~Key() {
 void Key::fromIntArray(int *incomingArray) {
 }
 
+void Key::print() const {
+	for (int i = 0; i < this->size(); i++) {
+		std::cout << at(i);
+	}
+	std::cout << std::endl;
+}
+
 std::vector<int> Key::toIntArray() const {
-	return std::vector<int>(100); // stub
+	std::vector<int> intArray(100);
+	for (int i = 0; i < this->size(); i++) {
+		intArray[i] = this->at(i);
+	}
+	return intArray; // stub
 }
 
 void Key::toggleAt(int index) {
+	this->at(index) = !this->at(index);
 }
 
 bool Key::getValAt(int index) {
-	return false; // stub
+	return this->at(index);
 }
 #endif
