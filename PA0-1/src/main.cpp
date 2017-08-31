@@ -22,7 +22,7 @@ double eval(const Key& key) {
 }
 
 bool flipCoin() {
-  return (rand() % 5 != 0);
+  return (rand() % 2 != 0);
 }
 
 void getRandom(Key& key) {
@@ -38,23 +38,24 @@ double bestFitnessFrom(const Key& startingKey, Key& endingKey) {
   double current = 0.0, best = 0.0;
 
   // method
-  for (int i = 0; i < 100; i++) {
-    key[i%100] = !key[i%100];
+  for (int i = 0; i < 200; i++) {
+    int index = (i < 100) ? i : rand() % 50;
+    key[index] = !key[index];
     current = eval(key);
     if (current > best) {
       best = current;
       endingKey = key;
-      cout << "i = " << i << " index = " << i%100 << " updated key to ";
+      cout << "i = " << i << " index = " << index << " updated key to ";
       endingKey.print();
     } else {
-      key[i%100] = !key[i%100];
+      key[index] = !key[index];
     }
   }
 
   return best;
 }
 
-struct Keychain {
+struct Keypath {
   Key startingKey;
   Key endingKey;
   double bestKey;
@@ -63,27 +64,30 @@ struct Keychain {
 int main (int argc, char *argv[]) {
   int numTasks, taskId, hostnameLength;
   char hostname[100];
-  MPI_Init(&argc, &argv);
-  MPI_Comm_size(MPI_COMM_WORLD, &numTasks);
-  MPI_Comm_rank(MPI_COMM_WORLD, &taskId);
-  MPI_Get_processor_name(hostname, &hostnameLength);
+  // MPI_Init(&argc, &argv);
+  // MPI_Comm_size(MPI_COMM_WORLD, &numTasks);
+  // MPI_Comm_rank(MPI_COMM_WORLD, &taskId);
+  // MPI_Get_processor_name(hostname, &hostnameLength);
 
   srand(time(NULL) + taskId);
   cout.precision(6);
 
   // init keys
-  Key key(100), bestKey(100);
-  getRandom(key);
-  //cout << "started: ";
-  //key.print();
+  vector<Keypath> keys(100);
+  //Key key(100), bestKey(100);
+  double bestFound = 0.0;
+  for (Keypath key : keys) {
+    getRandom(key.startingKey);
+    key.bestKey = bestFitnessFrom(key.startingKey, key.endingKey);
+    bestFound = max(bestFound, key.bestKey);
+  }
 
   // calc boundaries
-  double bestFitness = bestFitnessFrom(key, bestKey);
 
   // display best
   //cout << "best is: ";
   //bestKey.print();
 
-  cout << "best fitness = " << bestFitness << endl;
+  cout << "best fitness = " << bestFound << endl;
   return 0;
 }

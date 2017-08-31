@@ -3,6 +3,12 @@
 
 #include "Key.h"
 
+Key::Key() {
+	for (int i = 0; i < 100; i++) {
+		push_back(0);
+	}
+}
+
 Key::Key(int size) {
 	for (int i = 0; i < size; i++) {
 		push_back(0);

@@ -6,9 +6,10 @@
 
 class Key : public std::vector<bool> {
 public:
+	Key();
 	Key(int size);
 	~Key();
-	
+
 	std::vector<int> toIntArray() const;
 
 	void print() const;
