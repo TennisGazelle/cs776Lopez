@@ -16,7 +16,7 @@ double eval(const Key& key) {
 }
 
 bool flipCoin() {
-  return (rand() % 2 == 0);
+  return (rand() % 3 == 0);
 }
 
 void getRandom(Key& key) {
@@ -30,16 +30,14 @@ void getRandom(Key& key) {
 double bestFitnessFrom(const Key& startingKey, Key& endingKey) {
   Key key = startingKey;
   double current = 0.0, best = 0.0;
-  current = eval(startingKey);
 
   // method
   for (int i = 0; i < 100; i++) {
     key[i] = !key[i];
-    current = eval(startingKey);
+    current = eval(key);
     if (current > best) {
       best = current;
       endingKey = key;
-      cout << "updating" << endl;
     } else {
       key[i] = !key[i];
     }
@@ -47,6 +45,12 @@ double bestFitnessFrom(const Key& startingKey, Key& endingKey) {
 
   return best;
 }
+
+struct Keychain {
+  Key startingKey;
+  Key endingKey;
+  double bestKey;
+};
 
 int main (int argc, char *argv[]) {
   srand(time(NULL));

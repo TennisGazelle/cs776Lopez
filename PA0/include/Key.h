@@ -8,8 +8,7 @@ class Key : public std::vector<bool> {
 public:
 	Key(int size);
 	~Key();
-
-	void fromIntArray(int *incomingArray);
+	
 	std::vector<int> toIntArray() const;
 
 	void print() const;

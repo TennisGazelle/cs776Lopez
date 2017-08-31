@@ -12,9 +12,6 @@ Key::Key(int size) {
 Key::~Key() {
 }
 
-void Key::fromIntArray(int *incomingArray) {
-}
-
 void Key::print() const {
 	for (int i = 0; i < this->size(); i++) {
 		std::cout << at(i);
