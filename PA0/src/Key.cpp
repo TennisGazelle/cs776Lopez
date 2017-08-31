@@ -13,7 +13,7 @@ Key::~Key() {
 }
 
 void Key::print() const {
-	for (int i = 0; i < this->size(); i++) {
+	for (unsigned int i = 0; i < this->size(); i++) {
 		std::cout << at(i);
 	}
 	std::cout << std::endl;
@@ -21,7 +21,7 @@ void Key::print() const {
 
 std::vector<int> Key::toIntArray() const {
 	std::vector<int> intArray(100);
-	for (int i = 0; i < this->size(); i++) {
+	for (unsigned int i = 0; i < this->size(); i++) {
 		intArray[i] = this->at(i);
 	}
 	return intArray; // stub

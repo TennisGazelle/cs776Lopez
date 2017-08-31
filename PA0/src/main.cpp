@@ -1,9 +1,15 @@
 // A simple hill climber
-#include "Key.h"
+// std libs
+#include <iostream>
 #include <cstdlib>
 #include <math.h>
-#include <iostream>
 #include <ctime>
+
+// external libraries
+#include "mpi.h"
+
+// personalized classes
+#include "Key.h"
 
 using namespace std;
 
@@ -16,11 +22,11 @@ double eval(const Key& key) {
 }
 
 bool flipCoin() {
-  return (rand() % 3 == 0);
+  return (rand() % 5 != 0);
 }
 
 void getRandom(Key& key) {
-  for (int i = 0; i < key.size(); i++) {
+  for (unsigned int i = 0; i < key.size(); i++) {
     if (flipCoin()) {
       key[i] = !key[i];
     }
@@ -33,13 +39,15 @@ double bestFitnessFrom(const Key& startingKey, Key& endingKey) {
 
   // method
   for (int i = 0; i < 100; i++) {
-    key[i] = !key[i];
+    key[i%100] = !key[i%100];
     current = eval(key);
     if (current > best) {
       best = current;
       endingKey = key;
+      cout << "i = " << i << " index = " << i%100 << " updated key to ";
+      endingKey.print();
     } else {
-      key[i] = !key[i];
+      key[i%100] = !key[i%100];
     }
   }
 
@@ -53,19 +61,28 @@ struct Keychain {
 };
 
 int main (int argc, char *argv[]) {
-  srand(time(NULL));
+  int numTasks, taskId, hostnameLength;
+  char hostname[100];
+  MPI_Init(&argc, &argv);
+  MPI_Comm_size(MPI_COMM_WORLD, &numTasks);
+  MPI_Comm_rank(MPI_COMM_WORLD, &taskId);
+  MPI_Get_processor_name(hostname, &hostnameLength);
+
+  srand(time(NULL) + taskId);
   cout.precision(6);
+
+  // init keys
   Key key(100), bestKey(100);
   getRandom(key);
-  cout << "started: ";
-  key.print();
+  //cout << "started: ";
+  //key.print();
 
-  double currentFitness = 0.0, bestFitness = 0.0;
+  // calc boundaries
+  double bestFitness = bestFitnessFrom(key, bestKey);
 
-  bestFitness = bestFitnessFrom(key, bestKey);
-
-  cout << "best is: ";
-  bestKey.print();
+  // display best
+  //cout << "best is: ";
+  //bestKey.print();
 
   cout << "best fitness = " << bestFitness << endl;
   return 0;

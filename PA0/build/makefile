@@ -1,10 +1,18 @@
-all: Key.o solver
+CC=mpic++
+CXXFLAGS=-Wall -std=c++11 -g
+LIBS=-lpmi
+INCLUDES=-I../include
 
-Key.o: ../include/Key.h ../src/Key.cpp
-	g++ -c ../src/Key.cpp -o ../bin/Key.o -I../include
+all: ../bin/Key.o solver
 
-solver: ../src/main.cpp ../bin/eval.o ../bin/Key.o
-	g++ -o solver ../src/main.cpp ../bin/eval.o ../bin/Key.o -I../include
+../bin/Key.o: ../include/Key.h ../src/Key.cpp
+	$(CC) $(CXXFLAGS) -c ../src/Key.cpp -o ../bin/Key.o $(INCLUDES)
+
+solver: ../src/main.cpp ../bin/eval1.o ../bin/Key.o
+	$(CC) $(CXXFLAGS) -o solver ../src/main.cpp ../bin/eval1.o ../bin/Key.o $(INCLUDES)
 
 clean:
 	rm -rf solver ../bin/Key.o
+
+runParallel: solver
+	mpirun -n 20 -host localhost ./solver
