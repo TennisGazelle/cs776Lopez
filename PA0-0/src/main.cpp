@@ -8,7 +8,7 @@
 
 using namespace std;
 
-const int MAX_BOAT_SIZE = 3;
+const int MAX_BOAT_SIZE = 2;
 
 void printTabs(int num) {
   for (int i = 0; i < num; i++) {
@@ -156,8 +156,8 @@ int main(int argc, char const *argv[]) {
   std::vector<GameState*> history;
 
   root = new GameState();
-  root->numMissionariesLeft = 6;
-  root->numCannibalsLeft = 2;
+  root->numMissionariesLeft = 3;
+  root->numCannibalsLeft = 3;
   root->numMissionariesRight = 0;
   root->numCannibalsRight = 0;
   root->parent = NULL;
@@ -169,16 +169,10 @@ int main(int argc, char const *argv[]) {
   // while solution not found
   while (!solutionFound && q.size() > 0) {
     // pop off
-    //cout << "Queue has: " << q.size() << " - History has: " << history.size() << endl;
+    cout << "Queue has: " << q.size() << " - History has: " << history.size() << endl;
     currentGameState = q.front();
     q.pop();
     history.push_back(currentGameState);
-
-    // see if answer, set flag
-    if (currentGameState->isSolution()) {
-      solutionFound = true;
-      break;
-    }
 
     // otherwise, make all possible children
     for (int peopleCounter = MAX_BOAT_SIZE; peopleCounter > 0; peopleCounter--) {
