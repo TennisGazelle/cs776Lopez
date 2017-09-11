@@ -12,7 +12,7 @@ solver: ../src/main.cpp ../bin/eval1.o ../bin/Key.o
 	$(CC) $(CXXFLAGS) -o solver ../src/main.cpp ../bin/eval1.o ../bin/Key.o $(INCLUDES)
 
 run: solver
-	./solver
+	mpirun -n 1 -host localhost ./solver
 
 clean:
 	rm -rf solver ../bin/Key.o
