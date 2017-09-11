@@ -152,8 +152,8 @@ int main(int argc, char const *argv[]) {
   // BREADTH FIRST SEARCH
   GameState *root, *currentGameState, *proposedGameState;
   bool solutionFound = false;
-  std::queue<GameState*> q;
-  std::vector<GameState*> history;
+  queue<GameState*> q;
+  vector<GameState*> history;
 
   root = new GameState();
   root->numMissionariesLeft = 3;
