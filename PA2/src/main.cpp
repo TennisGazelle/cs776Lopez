@@ -1,6 +1,7 @@
 // A simple hill climber
 // std libs
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <math.h>
 #include <ctime>
@@ -46,20 +47,26 @@ Key substituteSubStringWith(Key first, int startingIndex, int windowSize, int bo
   return first;
 }
 
-double bestFitnessFrom(const Key& startingKey, Key& bestKey) {
+int randBetween(int low, int high) {
+  int range = high - low;
+  return (rand() % range) + low;
+}
+
+double bestFitnessFrom(const Key& startingKey, Key& bestKey, std::vector<double>& currentHistory) {
   Key key = startingKey;
   bestKey = key;
   double current = 0.0, best = 0.0;
 
   // window sizing
-  for (int w = 1; w < 10; w++) {
-    key = startingKey;
+  for (int w = 1; w < 20; w++) {
+    //key = startingKey;
     cout << "[" << taskId << "] - increased window size to " << w << endl;
     for (int index = 0; index < (key.size() - w + 1); index++) {
       // do it for all iterations of windows size
       for (int i = 0; i < pow(2, w); i++) {
-        //key = substituteSubStringWith(key, index, w, i);
+        key = substituteSubStringWith(key, index, w, i);
         current = eval(key);
+        currentHistory.push_back(current);
         if (current >= best) {
           best = current;
           bestKey = key;
@@ -125,6 +132,7 @@ struct Keypath {
   Key startingKey;
   Key endingKey;
   double bestKeyValue;
+  std::vector<double> pathHistory;
 };
 
 int main (int argc, char *argv[]) {
@@ -139,22 +147,38 @@ int main (int argc, char *argv[]) {
   cout.precision(6);
 
   // init keys
-  vector<Keypath> keys(10);
-  Keypath bestKeyPath;
+  vector<Keypath> keys(1000);
+  Keypath bestKeyPath, worstKeyPath;
 
   for (Keypath key : keys) {
     getRandom(key.startingKey);
     //cout << "starting with - \t\t";
     //key.startingKey.print();
-    key.bestKeyValue = bestFitnessFrom(key.startingKey, key.endingKey);
+    key.bestKeyValue = bestFitnessFrom(key.startingKey, key.endingKey, key.pathHistory);
     if (bestKeyPath.bestKeyValue < key.bestKeyValue) {
       bestKeyPath = key;
+    }
+    if (worstKeyPath.bestKeyValue > key.bestKeyValue) {
+      worstKeyPath = key;
     }
     //cout << "with value " << key.bestKeyValue << ", converged to \t";
     //key.endingKey.print();
     //cout << endl;
   }
 
+  // print out each processors best and worst path
+  std::string bestDataOutputFileName = "../data/" + std::string(hostname) + "_" + std::to_string(taskId);
+  std::string worstDataOutputFileName = bestDataOutputFileName + "_worst.csv";
+  bestDataOutputFileName += "_best.csv";
+  std::ofstream bestOut(bestDataOutputFileName.c_str()), worstOut(worstDataOutputFileName.c_str());
+  for (unsigned int i = 0; i < bestKeyPath.pathHistory.size(); i++) {
+    bestOut << i << "," << bestKeyPath.pathHistory[i] << std::endl;
+  }
+  for (unsigned int i = 0; i < worstKeyPath.pathHistory.size(); i++) {
+    worstOut << i << "," << worstKeyPath.pathHistory[i] << std::endl;
+  }
+  bestOut.close();
+  worstOut.close();
 
   Keypath slaveBest;
   if (taskId == 0 && numTasks > 1) {
