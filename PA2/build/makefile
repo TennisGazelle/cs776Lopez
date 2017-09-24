@@ -18,4 +18,4 @@ clean:
 	rm -rf solver ../bin/Key.o
 
 runParallel: solver
-	mpirun -n 4 -host localhost ./solver
+	mpirun -n 9 -host localhost ./solver
