@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "config.h"
 #include "Individual.h"
 
 using namespace std;
@@ -13,6 +14,8 @@ public:
     ~Population();
     
     void generate(int n = 100);
+    void print() const;
+    void evaluate();
 
     double minFitness, maxFitness, averageFitness;
     int bestIndividualIndex, worstIndividualIndex;
