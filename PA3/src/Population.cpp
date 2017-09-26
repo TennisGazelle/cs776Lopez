@@ -3,6 +3,8 @@
 
 #include "Population.h"
 #include "config.h"
+#include <cmath>
+#include <climits>
 
 Population::Population() : minFitness(INT_MAX), maxFitness(0.0), averageFitness(0.0), sumFitness(0.0), bestIndividualIndex(0), worstIndividualIndex(0) {
 

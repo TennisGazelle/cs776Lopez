@@ -2,7 +2,7 @@
 #define __EVALUATOR_CPP_
 
 #include "Evaluator.h"
-#include "Config.h"
+#include "config.h"
 
 Evaluator::Evaluator() {
 
