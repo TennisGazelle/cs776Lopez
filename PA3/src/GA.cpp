@@ -44,7 +44,7 @@ void GA::run() {
     //string filename = "../out/" + getOutputFilename() + ".csv";
     //Logger logger (filename);
     //logger.log("# Reporting files for " + to_string(config.PROB_MUTATION) + " MUTATION AND " + to_string(config.PROB_CROSSOVER) + " CROSSOVER");
-    for (int i = 0; i < 5000; i++) {
+    for (int i = 0; i < config.ITERATION_SIZE; i++) {
         //cout << "Parent: " << i << endl;
         //parentPop.print();
         makeNextGen();

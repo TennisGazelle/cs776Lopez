@@ -34,6 +34,8 @@ struct Config {
     }
     double PROB_MUTATION = 0.01; // 0.01, 0.001, 0.0001
     double PROB_CROSSOVER = 0.2;  // 0.2, 0.67, 0.99
+    unsigned int ITERATION_SIZE = 5000;
+    unsigned int TOTAL_GAS_SIZE = 30;
     unsigned int CHROMOSOME_SUBDIVISION_SIZE;
     unsigned int CHROMOSOME_SIZE;
     unsigned int POPULATION_SIZE;
