@@ -17,8 +17,14 @@ public:
     void print() const;
     void evaluate();
 
+    Individual proportionalSelect();
+    Individual getBestIndividual() const;
+
     double minFitness, maxFitness, averageFitness;
     int bestIndividualIndex, worstIndividualIndex;
+
+private:
+    double sumFitness;
 };
 
 #endif

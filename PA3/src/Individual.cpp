@@ -2,8 +2,11 @@
 #define __INDIVIDUAL_CPP_
 
 #include "Individual.h"
+#include "config.h"
 
-Individual::Individual() : vector<bool>(config.CHROMOSOME_SIZE), fitness(0.0), eval(NULL) {
+Config config;
+
+Individual::Individual() : vector<bool>(config.CHROMOSOME_SIZE), fitness(0.0), normalizedProb(0.0), eval(NULL) {
 }
 
 void Individual::init() {
@@ -62,6 +65,26 @@ double Individual::getBinaryAsNumber(vector<bool> subset) const {
         sum += subset[i] * pow(2, power--);
     }
     return sum;
+}
+
+void Individual::crossoverWith(Individual& other) {
+    // pick random index
+    int index = randIntBetween(0, size());
+    // get the two subsets
+    vector<bool> lSubset(begin() + index, end()), rSubset(other.begin() + index, other.end());
+    // assign them back
+    for (int i = index; i < size(); i++) {
+        (*this)[i] = rSubset[i - index];
+        other[i] = lSubset[i - index];
+    }
+}
+
+void Individual::mutate() {
+    // pick a random index
+    int index = randIntBetween(0, size());
+
+    // flip it!
+    (*this)[index] = !at(index);
 }
 
 #endif

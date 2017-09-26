@@ -8,7 +8,6 @@
 
 class Evaluator;
 
-#include "config.h"
 #include "Evaluator.h"
 
 using namespace std;
@@ -23,7 +22,11 @@ public:
     void evaluate();
     vector<double> getAsValues() const;
 
+    void crossoverWith(Individual& other);
+    void mutate();
+
     double fitness;
+    double normalizedProb;
     Evaluator *eval;
 
 private:
