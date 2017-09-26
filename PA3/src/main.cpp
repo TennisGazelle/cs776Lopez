@@ -28,9 +28,35 @@ void getAverageValues(vector<GA> gas, vector<double>& avgMin, vector<double>& av
 
 int main(int argc, char *argv[]) {
     srand(time(NULL));
+    if (argc >= 2) {
+        switch(atoi(argv[1])) {
+            case 1:
+                config = config_1;
+                cout << "working on config_1" << endl;
+                break;
+            case 2:
+                config = config_2;
+                cout << "working on config_2" << endl;
+                break;
+            case 3:
+                config = config_3;
+                cout << "working on config_3" << endl;
+                break;
+            case 4:
+                config = config_4;
+                cout << "working on config_4" << endl;
+                break;
+            case 5:
+                config = config_5;
+                cout << "working on config_5" << endl;
+                break;
+            default:
+                cout << "not lol..." << endl;
+                break;
+        }
+    }
 
     // set the config and set up file
-    config = config_2;
     Logger logger(getOutputFilename());
 
     // run the 30 iterations
