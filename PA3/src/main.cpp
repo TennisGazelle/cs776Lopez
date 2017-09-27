@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include <pthread.h>
 
 #include "config.h"
 #include "Logger.h"
@@ -26,6 +27,13 @@ void getAverageValues(vector<GA> gas, vector<double>& avgMin, vector<double>& av
     }
 }
 
+void *runTheGA(GA* gaToRun) {
+    gaToRun->init();
+    gaToRun->run();
+
+    pthread_exit(NULL);
+}
+
 int main(int argc, char *argv[]) {
     srand(time(NULL));
     if (argc >= 2) {
@@ -36,7 +44,7 @@ int main(int argc, char *argv[]) {
                 break;
             case 2:
                 config = config_2;
-                cout << "working on config_2" << endl;
+                cout << "working on config_2" << to_string(config.function) << endl;
                 break;
             case 3:
                 config = config_3;
@@ -52,31 +60,53 @@ int main(int argc, char *argv[]) {
                 break;
             default:
                 cout << "not lol..." << endl;
+                config = config_test;
                 break;
+        }
+    } else {
+        config = config_test;
+    }
+
+    pair<double, double> probabilityCombinations[] = {
+        {0.01,    0.2},
+        {0.01,    0.67},
+        {0.01,    0.99},
+        {0.001,   0.2},
+        {0.001,   0.67},
+        {0.001,   0.99},
+        {0.0001,  0.2},
+        {0.0001,  0.67},
+        {0.0001,  0.99}
+    };
+
+    for (auto combo : probabilityCombinations) {
+        // set the combo testing
+        config.PROB_MUTATION = combo.first;
+        config.PROB_CROSSOVER = combo.second;
+
+        // set the config and set up file
+        Logger logger(getOutputFilename());
+    
+        // run the 30 iterations
+        vector<GA> runs(config.TOTAL_GAS_SIZE);
+        vector<double> mins, maxs, avgs;
+        for (int i = 0; i < config.TOTAL_GAS_SIZE; i++) {
+            cout << "running GA " << i << "..." << endl;
+            runs[i].init();
+            runs[i].run();
+        }
+    
+        // compile and log averagaes
+        getAverageValues(runs, mins, avgs, maxs);
+        for (int i = 0; i < mins.size(); i++) {
+            //cout << mins[i] << '\t' << avgs[i] << '\t' << maxs[i] << endl;
+            string log = to_string(mins[i]) + "," +
+                        to_string(avgs[i]) + "," +
+                        to_string(maxs[i]) + ",";
+            logger.log(log);
         }
     }
 
-    // set the config and set up file
-    Logger logger(getOutputFilename());
-
-    // run the 30 iterations
-    vector<GA> runs(config.TOTAL_GAS_SIZE);
-    vector<double> mins, maxs, avgs;
-    for (int i = 0; i < config.TOTAL_GAS_SIZE; i++) {
-        cout << "running GA " << i << "..." << endl;
-        runs[i].init();
-        runs[i].run();
-    }
-
-    // compile and log averagaes
-    getAverageValues(runs, mins, avgs, maxs);
-    for (int i = 0; i < mins.size(); i++) {
-        cout << mins[i] << '\t' << avgs[i] << '\t' << maxs[i] << endl;
-        string log = to_string(mins[i]) + "," +
-                    to_string(avgs[i]) + "," +
-                    to_string(maxs[i]) + ",";
-        logger.log(log);
-    }
 
     return 0;
 }

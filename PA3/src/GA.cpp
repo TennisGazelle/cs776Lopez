@@ -8,10 +8,9 @@ void GA::init() {
     parentPop.generate(config.POPULATION_SIZE);
     for (unsigned int i = 0; i < parentPop.size(); i++) {
         parentPop[i].eval = &evaluator;
-        //parentPop[i].evaluate();
     }
     parentPop.evaluate();
-    //parentPop.print();
+    // parentPop.print();
 }
 
 void GA::makeNextGen() {

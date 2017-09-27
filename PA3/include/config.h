@@ -3,10 +3,12 @@
 
 #include <cstdlib>
 #include <string>
+#include <iostream>
+
 using namespace std;
 
 enum Function {
-    DEJONG_1,
+    DEJONG_1 = 0,
     DEJONG_2,
     DEJONG_3,
     DEJONG_4,
@@ -30,11 +32,12 @@ struct Config {
         this->CHROMOSOME_SUBDIVISION_SIZE = other.CHROMOSOME_SUBDIVISION_SIZE;
         this->CHROMOSOME_SIZE = other.CHROMOSOME_SIZE;
         this->POPULATION_SIZE = other.POPULATION_SIZE;
+        this->function = other.function;
         return *this;
     }
     double PROB_MUTATION = 0.01; // 0.01, 0.001, 0.0001
     double PROB_CROSSOVER = 0.2;  // 0.2, 0.67, 0.99
-    unsigned int ITERATION_SIZE = 5000;
+    unsigned int ITERATION_SIZE = 500;
     unsigned int TOTAL_GAS_SIZE = 30;
     unsigned int CHROMOSOME_SUBDIVISION_SIZE;
     unsigned int CHROMOSOME_SIZE;
@@ -42,11 +45,11 @@ struct Config {
     Function function;
 };
 
-const Config config_1(10, 3, 1000, DEJONG_1);
-const Config config_2(14, 2, 1000, DEJONG_2);
-const Config config_3(10, 5, 1000, DEJONG_3);
-const Config config_4(8, 30, 1000, DEJONG_4);
-const Config config_5(16, 2, 1000, DEJONG_5);
+const Config config_1(10, 3, 200, DEJONG_1);
+const Config config_2(14, 2, 200, DEJONG_2);
+const Config config_3(10, 5, 200, DEJONG_3);
+const Config config_4(8, 30, 200, DEJONG_4);
+const Config config_5(16, 2, 200, DEJONG_5);
 const Config config_test(4, 3, 10, DEJONG_1);
 
 extern Config config;
