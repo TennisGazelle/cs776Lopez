@@ -100,9 +100,10 @@ int main(int argc, char *argv[]) {
         getAverageValues(runs, mins, avgs, maxs);
         for (int i = 0; i < mins.size(); i++) {
             //cout << mins[i] << '\t' << avgs[i] << '\t' << maxs[i] << endl;
-            string log = to_string(mins[i]) + "," +
-                        to_string(avgs[i]) + "," +
-                        to_string(maxs[i]) + ",";
+            string log = to_string(i) + "\t" +
+                        to_string(mins[i]) + "\t" +
+                        to_string(avgs[i]) + "\t" +
+                        to_string(maxs[i]) + "\t";
             logger.log(log);
         }
     }
