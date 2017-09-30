@@ -46,11 +46,11 @@ struct Config {
 };
 
 const Config config_1(10, 3, 200, DEJONG_1);
-const Config config_2(14, 2, 200, DEJONG_2);
+const Config config_2(12, 2, 200, DEJONG_2);
 const Config config_3(10, 5, 200, DEJONG_3);
-const Config config_4(8, 30, 200, DEJONG_4);
+const Config config_4(8, 25, 200, DEJONG_4);
 const Config config_5(16, 2, 200, DEJONG_5);
-const Config config_test(4, 3, 10, DEJONG_1);
+const Config config_test(8, 25, 10, DEJONG_4);
 
 extern Config config;
 

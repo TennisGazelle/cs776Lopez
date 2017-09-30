@@ -44,12 +44,14 @@ vector<double> Individual::getAsValues() const {
                 num = (num - 512.0) / 100.0;
                 break;
             case DEJONG_2:
-                num = (num - 2048.0) / 1000;
+                num = (num - 2048.0) / 1000.0;
                 break;
             case DEJONG_4:
-                num = (num - 256.0) / 100.0;
+                num = (num - 128.0) / 100.0;
+                break;
             case DEJONG_5:
                 num = (num - 65536.0) / 1000.0;
+                break;
             default:
                 break;
         }

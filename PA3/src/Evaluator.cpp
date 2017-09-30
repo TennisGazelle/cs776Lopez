@@ -3,6 +3,7 @@
 
 #include "Evaluator.h"
 #include "config.h"
+#include <random>
 
 Evaluator::Evaluator() {
 
@@ -13,7 +14,9 @@ Evaluator::~Evaluator() {
 }
 
 double gauss(int mu, int sd) {
-    return 0.0;
+    static default_random_engine generator;
+    static normal_distribution<double> distribution(mu, sd);
+    return distribution(generator);
 }
 
 double Evaluator::evaluate(Individual *i) {
@@ -26,7 +29,7 @@ double Evaluator::evaluate(Individual *i) {
         return sum;
     } else if (config.function == DEJONG_2) {
         double result = pow(pow(x[0], 2) - x[1], 2);
-        result = 100*result + pow(1 - x[0], 2);
+        result = (100*result) + pow(1 - x[0], 2);
         return result;
     } else if (config.function == DEJONG_3) {
         double result = 0.0;
@@ -36,9 +39,13 @@ double Evaluator::evaluate(Individual *i) {
         return result;
     } else if (config.function == DEJONG_4) {
         double result = 0.0;
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 25; i++) {
             result += (i+1) * pow(x[i], 4);
             result += gauss(0, 1);
+            // char dummy = '1';
+            // cout << "with values: " << x[0] << " " << x[1] << " ";
+            // cout << "result = " << result << endl;
+            // cin >> dummy;
         }
         return result;
     } else if (config.function == DEJONG_5) {
