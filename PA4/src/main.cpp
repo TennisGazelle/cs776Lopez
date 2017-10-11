@@ -77,44 +77,51 @@ int main(int argc, char *argv[]) {
         {0.0001,  0.99}
     };
 
-    Individual bestIndividual;
-    pair<double, double> bestCombo;
-    for (auto combo : probabilityCombinations) {
-        // set the combo testing
-        config.PROB_MUTATION = combo.first;
-        config.PROB_CROSSOVER = combo.second;
-        cout << "now testing the configuration:  " << combo.first << " " << combo.second << endl;
+    vector<Individual> bestIndividuals;
+    // set the combo testing
+    config.PROB_MUTATION = probabilityCombinations[2].first;
+    config.PROB_CROSSOVER = probabilityCombinations[2].second;
 
-        // set the config and set up file
-        Logger logger(getOutputFilename() + ".tsv");
-    
-        // run the 30 iterations
-        vector<GA> runs(config.TOTAL_GAS_SIZE);
-        vector<double> mins, maxs, avgs;
-        for (int i = 0; i < config.TOTAL_GAS_SIZE; i++) {
-            cout << "running GA " << i << "..." << endl;
-            runs[i].init();
-            runs[i].run();
-            if (runs[i].bestIndividualEver.fitness > bestIndividual.fitness) {
-                bestIndividual = runs[i].bestIndividualEver;
-                bestCombo = combo;
-            }
-        }
-    
-        // compile and log averagaes
-        getAverageValues(runs, mins, avgs, maxs);
-        for (int i = 0; i < mins.size(); i++) {
-            //cout << mins[i] << '\t' << avgs[i] << '\t' << maxs[i] << endl;
-            string log = to_string(i) + "\t" +
-                        to_string(mins[i]) + "\t" +
-                        to_string(avgs[i]) + "\t" +
-                        to_string(maxs[i]) + "\t";
-            logger.log(log);
-        }
+    // set the config and set up file
+    Logger graphLogger(getOutputFilename() + ".tsv"), bestIndividualsLogger("best" + getOutputFilename() + ".tsv");
+
+    // run the 30 iterations
+    vector<GA> runs(config.TOTAL_GAS_SIZE);
+    vector<double> mins, maxs, avgs;
+    for (int i = 0; i < config.TOTAL_GAS_SIZE; i++) {
+      cout << "running GA " << i << "..." << endl;
+      runs[i].init();
+      runs[i].run();
+      bestIndividuals.push_back(runs[i].bestIndividualEver);
     }
-    cout << "The best individual I ever saw" << endl;
-    bestIndividual.print();
 
+    // compile and log averagaes
+    getAverageValues(runs, mins, avgs, maxs);
+    for (int i = 0; i < mins.size(); i++) {
+      //cout << mins[i] << '\t' << avgs[i] << '\t' << maxs[i] << endl;
+      string log = to_string(i) + "\t" +
+      to_string(mins[i]) + "\t" +
+      to_string(avgs[i]) + "\t" +
+      to_string(maxs[i]) + "\t";
+      graphLogger.log(log);
+    }
+
+    // output the statistics of the best ever
+    for (unsigned int i = 0; i < bestIndividuals.size(); i++) {
+      // euclidian distance, fitness, indices
+      string indices = "\t";
+      for (unsigned int j = 0; j < bestIndividuals[i].size(); j++) {
+        indices += "\t";
+        indices += to_string(bestIndividuals[i][j]);
+      }
+      bestIndividualsLogger.log(
+        to_string(bestIndividuals[i].diffDistance/(bestIndividuals[i].diffDistance + bestIndividuals[i].distance)) + "\t" +
+        to_string(bestIndividuals[i].diffDistance) + "\t" +
+        to_string(bestIndividuals[i].distance) + "\t" +
+        //to_string(bestIndividuals[i].fitness) + "\t" +
+        indices
+      );
+    }
 
     return 0;
 }

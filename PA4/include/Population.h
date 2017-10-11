@@ -12,12 +12,14 @@ class Population : public vector<Individual> {
 public:
     Population();
     ~Population();
-    
+
     void generate(int n = 100);
     void print() const;
     void evaluate();
+    void sortByFitness();
 
     Individual proportionalSelect();
+    Individual tournamentSelect();
     Individual getBestIndividual() const;
 
     double minFitness, maxFitness, averageFitness;

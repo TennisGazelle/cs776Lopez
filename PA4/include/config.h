@@ -7,6 +7,8 @@
 
 using namespace std;
 
+#define BREAKINGPOINT char dummychar; cin >> dummychar;
+
 enum City {
     BURMA = 0,  // burma 14
     BERLIN,     // berlin 52
@@ -23,26 +25,32 @@ struct Config {
             case BURMA:
                 CITY_TOUR_SIZE = 14;
                 INPUT_FILENAME = "../in/burma14.tsp";
+                SOLUTION_FILENAME = "../in/solution/burma14.opt.tour";
                 break;
             case BERLIN:
                 CITY_TOUR_SIZE = 52;
                 INPUT_FILENAME = "../in/berlin52.tsp";
+                SOLUTION_FILENAME = "../in/solution/berlin52.opt.tour";
                 break;
             case ELI_51:
                 CITY_TOUR_SIZE = 51;
                 INPUT_FILENAME = "../in/eil51.tsp";
+                SOLUTION_FILENAME = "../in/solution/eil51.opt.tour";
                 break;
             case ELI_76:
                 CITY_TOUR_SIZE = 76;
                 INPUT_FILENAME = "../in/eil76.tsp";
+                SOLUTION_FILENAME = "../in/solution/eil76.opt.tour";
                 break;
             case LIN_105:
                 CITY_TOUR_SIZE = 105;
                 INPUT_FILENAME = "../in/lin105.tsp";
+                SOLUTION_FILENAME = "../in/solution/lin105.opt.tour";
                 break;
             case LIN_318:
                 CITY_TOUR_SIZE = 318;
-                INPUT_FILENAME = "../in/line318.tsp";
+                INPUT_FILENAME = "../in/lin318.tsp";
+                SOLUTION_FILENAME = "../in/solution/lin318.opt.tour";
                 break;
             default:
                 break;
@@ -56,15 +64,17 @@ struct Config {
         this->PROB_CROSSOVER = other.PROB_CROSSOVER;
         this->CITY_TOUR_SIZE = other.CITY_TOUR_SIZE;
         this->INPUT_FILENAME = other.INPUT_FILENAME;
+        this->SOLUTION_FILENAME = other.SOLUTION_FILENAME;
         this->city = other.city;
         return *this;
     }
     double PROB_MUTATION = 0.001; // 0.01, 0.001, 0.0001
     double PROB_CROSSOVER = 0.20;  // 0.2, 0.67, 0.99
     string INPUT_FILENAME;
+    string SOLUTION_FILENAME;
     unsigned int CITY_TOUR_SIZE = 14;
-    unsigned int POPULATION_SIZE = 100;
-    unsigned int ITERATION_SIZE = 500;
+    unsigned int POPULATION_SIZE = 1000;
+    unsigned int ITERATION_SIZE = 5000;
     unsigned int TOTAL_GAS_SIZE = 30; // 5 for testing, 30 for reality
     City city;
 };

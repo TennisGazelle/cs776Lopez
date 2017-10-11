@@ -18,11 +18,13 @@ class Evaluator {
 public:
     Evaluator();
     ~Evaluator();
-    double evaluate(Individual &indiv);
+    void evaluate(Individual &indiv);
     void init();
+    void getBestSolution();
 
     vector<Point> pointsOfReference;
 
+    Individual* bestSolution;
 private:
     double getDistanceBetween(unsigned int startIndex, unsigned int endIndex);
 };

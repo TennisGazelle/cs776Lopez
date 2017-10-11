@@ -7,11 +7,13 @@
 #include "config.h"
 
 Evaluator::Evaluator() {
-
+  bestSolution = new Individual();
 }
 
 Evaluator::~Evaluator() {
-
+  // if (bestSolution != NULL) {
+  //   delete bestSolution;
+  // }
 }
 
 void Evaluator::init() {
@@ -20,7 +22,7 @@ void Evaluator::init() {
     unsigned int lineNumber;
     ifstream fin;
     Point tempPoint;
-    
+
     // get filename
     pointsOfReference.clear();
     fin.clear();
@@ -37,13 +39,27 @@ void Evaluator::init() {
 
     fin.close();
 
-    // // find and save the solution file, just for giggles.
-    // solutionFilename = "../in/solution/burma52.opt.tour";
-    // fin.clear();
-    // fin.open()
+    getBestSolution();
 }
 
-double Evaluator::evaluate(Individual &indiv) {
+void Evaluator::getBestSolution() {
+  // find the solution file and read in the values
+  //bestSolution->clear();
+  ifstream fin;
+  fin.clear();
+  fin.open(config.SOLUTION_FILENAME.c_str());
+  for (int i = 0; i < config.CITY_TOUR_SIZE; i++) {
+    fin >> (*bestSolution)[i];
+  }
+  cout << endl;
+  fin.close();
+
+  // get my own statistics on the issue
+  bestSolution->eval = this;
+  bestSolution->evaluate();
+}
+
+void Evaluator::evaluate(Individual &indiv) {
     double sum = 0.0;
     for (int i = 0; i < indiv.size()-1; i++) {
         sum += getDistanceBetween(indiv[i], indiv[i+1]);
@@ -52,19 +68,31 @@ double Evaluator::evaluate(Individual &indiv) {
     indiv.distance = sum;
     switch(config.city) {
         case BURMA:
-            return 1000.0/sum;
+            indiv.fitness = 1000.0/sum;
+            break;
         case BERLIN:
-            return 100000.0/sum;
+            indiv.fitness = 10000000.0/sum;
+            break;
         case ELI_51:
-            return 100000.0/sum;
+            indiv.fitness = 100000.0/sum;
+            break;
         case ELI_76:
-            return 100000.0/sum;
+            indiv.fitness = 100000.0/sum;
+            break;
         case LIN_105:
-            return 10000000.0/sum;
+            indiv.fitness = 10000000.0/sum;
+            break;
         case LIN_318:
-            return sum;
+            indiv.fitness = 100000000.0/sum;
+            break;
         default:
-            return 1.0/sum;
+            indiv.fitness = 1.0/sum;
+            break;
+    }
+
+    if (&indiv != bestSolution) {
+      indiv.diffFitness = (indiv.fitness - bestSolution->fitness);
+      indiv.diffDistance = (indiv.distance - bestSolution->distance);
     }
 }
 
@@ -75,6 +103,9 @@ double Evaluator::getDistanceBetween(unsigned int startIndex, unsigned int endIn
     deltaX = pow(deltaX, 2);
     double deltaY = pointsOfReference[startIndex].y - pointsOfReference[endIndex].y;
     deltaY = pow(deltaY, 2);
+
+    if (deltaX < 0 || deltaY < 0)
+      cout << "negative values...." << endl;
 
     //TODO: remove the sqrt for faster processings
     return sqrt(deltaX + deltaY);

@@ -54,6 +54,20 @@ void Population::evaluate() {
     }
 }
 
+void Population::sortByFitness() {
+  // bubble sort, because fuck it
+  bool isSorted = false;
+  while (!isSorted) {
+    isSorted = true;
+    for (unsigned int i = 0; i < size()-1; i++) {
+      if (at(i).fitness > at(i+1).fitness) {
+        std::swap((*this)[i], (*this)[i+1]);
+        isSorted = false;
+      }
+    }
+  }
+}
+
 Individual Population::proportionalSelect() {
     // get a random number between 0 and 1
     double shot = double(rand())/double(RAND_MAX);
@@ -64,6 +78,16 @@ Individual Population::proportionalSelect() {
         }
     }
     return at(size()-1);
+}
+
+Individual Population::tournamentSelect() {
+  int left = randIntBetween(0, size());
+  int right = randIntBetween(0, size());
+  if (at(left).fitness >= at(right).fitness) {
+    return at(left);
+  } else {
+    return at(right);
+  }
 }
 
 Individual Population::getBestIndividual() const {

@@ -18,7 +18,7 @@ void GA::makeNextGen() {
     childPop.clear();
     for(unsigned int i = 0; i < parentPop.size(); i++) {
         childPop.push_back(
-            parentPop.proportionalSelect()
+            parentPop.tournamentSelect()
         );
 
         // if cross over probability, mess with individual i, and individual i _1
@@ -37,30 +37,28 @@ void GA::makeNextGen() {
     if (bestIndividualEver.fitness < childPop.getBestIndividual().fitness) {
         bestIndividualEver = childPop.getBestIndividual();
     }
-    //childPop.print();
+
+    // compile both populations, keep the second half
+    childPop.insert(childPop.end(), parentPop.begin(), parentPop.end());
+    childPop.sortByFitness();
+    childPop.erase(childPop.begin(), childPop.begin() + (childPop.size()/2));
 }
 
 void GA::run() {
-    //string filename = "../out/" + getOutputFilename() + ".csv";
-    //Logger logger (filename);
-    //logger.log("# Reporting files for " + to_string(config.PROB_MUTATION) + " MUTATION AND " + to_string(config.PROB_CROSSOVER) + " CROSSOVER");
     for (int i = 0; i < config.ITERATION_SIZE; i++) {
-        //cout << "Parent: " << i << endl;
-        //parentPop.print();
         makeNextGen();
         parentPop = childPop;
-        if (i % 100 == 0)
-            cout << ".";
     }
     for (int i = 0; i < averageTimeline.size(); i++) {
         string log = to_string(minTimeline[i]) + "," +
                     to_string(averageTimeline[i]) + "," +
                     to_string(maxTimeline[i]) + ",";
-        //logger.log(log);
-        //cout << log << endl;
     }
-
-    cout << "best - " << bestIndividualEver.fitness << endl;
+    cout << "my best: ";
+    bestIndividualEver.print();
+    cout << "actual : ";
+    evaluator.bestSolution->print();
+    cout << endl;
 }
 
 #endif

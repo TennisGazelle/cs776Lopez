@@ -15,6 +15,7 @@ using namespace std;
 class Individual : public vector<unsigned int> {
 public:
     Individual();
+    ~Individual();
 
     void generateRandom();
     void print() const;
@@ -28,6 +29,9 @@ public:
     double distance;
     double fitness;
     double normalizedProb;
+
+    double diffDistance;
+    double diffFitness;
     Evaluator *eval;
 
 private:

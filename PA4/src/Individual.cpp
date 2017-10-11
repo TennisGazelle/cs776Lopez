@@ -8,7 +8,10 @@
 
 Config config;
 
-Individual::Individual() : vector<unsigned int>(config.CITY_TOUR_SIZE), fitness(0.0), normalizedProb(0.0), eval(NULL) {
+Individual::Individual() : vector<unsigned int>(config.CITY_TOUR_SIZE), fitness(0.0), distance(0.0), normalizedProb(0.0), eval(NULL) {
+}
+
+Individual::~Individual() {
 }
 
 void Individual::init() {
@@ -36,7 +39,7 @@ void Individual::print() const {
 }
 
 void Individual::evaluate() {
-    fitness = eval->evaluate(*this);
+    eval->evaluate(*this);
 }
 
 void Individual::crossoverWith(Individual& other) {
@@ -57,7 +60,7 @@ void Individual::crossoverWith(Individual& other) {
             // swap it with that other number
             std::swap(left[i], left[j]);
         }
-        
+
         // do the same for the right
         for (int i = 0; i < index; i++) {
             int numberToFind = at(i);
@@ -67,7 +70,7 @@ void Individual::crossoverWith(Individual& other) {
             }
             std::swap(right[i], right[j]);
         }
-        
+
     // assign the left and right back to their owners
     (*this) = left;
     other = right;
