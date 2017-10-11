@@ -1,0 +1,152 @@
+working on config_1
+dataset: Burma
+running GA 0...
+
+my best: 01 02 03 13 11 05 04 06 12 10 08 09 00 07  - [fitness: 31.0469, distance: 32.2094]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 1...
+
+my best: 10 08 09 01 02 03 13 11 05 04 06 12 07 00  - [fitness: 31.0294, distance: 32.2275]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 2...
+
+my best: 12 10 08 09 00 07 01 13 02 03 04 05 11 06  - [fitness: 32.0423, distance: 31.2088]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 3...
+
+my best: 12 10 08 09 00 07 01 13 02 03 04 05 11 06  - [fitness: 32.0423, distance: 31.2088]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 4...
+
+my best: 13 11 03 04 05 06 12 07 10 08 09 00 01 02  - [fitness: 30.8402, distance: 32.4252]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 5...
+
+my best: 06 11 05 04 03 02 13 01 00 09 08 10 07 12  - [fitness: 32.385, distance: 30.8785]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 6...
+
+my best: 00 09 08 10 12 06 11 05 04 03 02 13 01 07  - [fitness: 32.0423, distance: 31.2088]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 7...
+
+my best: 04 03 02 01 07 00 09 08 10 12 06 13 11 05  - [fitness: 31.0959, distance: 32.1586]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 8...
+
+my best: 06 11 05 04 03 02 13 01 07 00 09 08 10 12  - [fitness: 32.0423, distance: 31.2088]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 9...
+
+my best: 02 03 04 05 11 06 12 07 00 10 08 09 01 13  - [fitness: 32.0237, distance: 31.2269]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 10...
+
+my best: 10 07 12 06 11 05 04 03 02 13 01 00 09 08  - [fitness: 32.385, distance: 30.8785]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 11...
+
+my best: 06 13 11 05 04 03 02 01 09 08 10 00 07 12  - [fitness: 31.0784, distance: 32.1767]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 12...
+
+my best: 08 10 07 12 06 11 05 04 03 02 13 01 00 09  - [fitness: 32.385, distance: 30.8785]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 13...
+
+my best: 04 05 11 13 03 02 01 09 08 10 00 07 12 06  - [fitness: 31.0294, distance: 32.2275]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 14...
+
+my best: 01 02 03 04 05 11 13 06 12 07 00 10 08 09  - [fitness: 31.0784, distance: 32.1767]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 15...
+
+my best: 01 07 00 09 08 10 12 06 11 05 04 03 02 13  - [fitness: 32.0423, distance: 31.2088]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 16...
+
+my best: 00 01 13 02 03 04 05 11 06 12 07 10 08 09  - [fitness: 32.385, distance: 30.8785]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 17...
+
+my best: 03 04 05 11 06 12 07 10 08 09 00 01 13 02  - [fitness: 32.385, distance: 30.8785]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 18...
+
+my best: 11 06 12 10 08 09 00 07 01 13 02 03 04 05  - [fitness: 32.0423, distance: 31.2088]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 19...
+
+my best: 12 07 10 08 09 00 01 13 02 03 04 05 11 06  - [fitness: 32.385, distance: 30.8785]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 20...
+
+my best: 12 06 11 05 04 03 02 13 01 09 08 10 00 07  - [fitness: 32.0237, distance: 31.2269]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 21...
+
+my best: 07 00 10 08 09 01 13 02 03 04 05 11 06 12  - [fitness: 32.0237, distance: 31.2269]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 22...
+
+my best: 12 10 08 09 00 07 01 13 02 03 04 05 11 06  - [fitness: 32.0423, distance: 31.2088]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 23...
+
+my best: 12 06 11 05 04 03 02 13 01 09 08 10 00 07  - [fitness: 32.0237, distance: 31.2269]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 24...
+
+my best: 09 08 10 07 12 06 11 05 04 03 02 13 01 00  - [fitness: 32.385, distance: 30.8785]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 25...
+
+my best: 07 00 09 08 10 12 06 04 05 11 13 03 02 01  - [fitness: 31.0469, distance: 32.2094]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 26...
+
+my best: 02 03 04 05 11 13 06 12 07 00 10 08 09 01  - [fitness: 31.0784, distance: 32.1767]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 27...
+
+my best: 04 03 02 06 12 10 08 09 00 07 01 13 11 05  - [fitness: 29.6833, distance: 33.689]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 28...
+
+my best: 01 07 00 09 08 10 12 06 11 05 04 03 02 13  - [fitness: 32.0423, distance: 31.2088]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
+running GA 29...
+
+my best: 13 11 05 04 03 02 01 07 00 09 08 10 12 06  - [fitness: 31.0959, distance: 32.1586]
+actual : 00 10 08 09 01 02 03 04 05 11 13 06 12 07  - [fitness: 31.0784, distance: 32.1767]
+
